@@ -46,7 +46,11 @@ def blank(word, sent):
     return None, None
 
 def load(level, base):
-    rows=[l.rstrip('\n').split('\t') for l in open(f'{base}/{level}/{level}.tsv', encoding='utf-8') if l.strip()]
+    import os, glob
+    files=sorted(glob.glob(f'{base}/{level}/[a-z].tsv'))
+    lines=[]
+    for f in files: lines+=open(f,encoding='utf-8').read().splitlines()
+    rows=[l.split('\t') for l in lines if l.strip() and not l.startswith('german word')]
     words={}
     stats={}
     for r in rows:
@@ -65,5 +69,10 @@ def load(level, base):
     return list(words.values()), stats
 if __name__=='__main__':
     ws,st=load(sys.argv[1], sys.argv[2])
+    excl=set()
+    for f in sys.argv[4:]:
+        excl|={w['a'] for w in json.load(open(f,encoding='utf-8'))}
+    n0=len(ws); ws=[w for w in ws if w['a'] not in excl]
+    print('excluded',n0-len(ws),file=sys.stderr)
     print(len(ws), st, file=sys.stderr)
     json.dump(ws, open(sys.argv[3],'w',encoding='utf-8'), ensure_ascii=False, indent=0)
