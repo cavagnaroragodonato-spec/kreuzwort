@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kreuzwort · Crucigramas de alemán</title>
+<meta name="description" content="Crucigramas para aprender vocabulario alemán A1, A2 y B1 (listas del Goethe-Institut).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Crect x='3' y='3' width='12' height='12' fill='%23fff'/%3E%3Crect x='17' y='17' width='12' height='12' fill='%23fff'/%3E%3Crect x='17' y='3' width='12' height='12' fill='%23e8b100'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== MAPA ===== -->
+<section id="mapView" class="view active">
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <div>
+        <h1>Kreuzwort</h1>
+        <p class="sub">Crucigramas para aprender alemán</p>
+      </div>
+    </div>
+    <div class="total" title="Estrellas totales"><span class="star on">★</span> <b id="totalStars">0</b><small id="totalMax">/0</small></div>
+  </header>
+  <div id="map" class="map"></div>
+  <footer class="foot">
+    Vocabulario: listas oficiales del Goethe-Institut vía
+    <a href="https://github.com/ilkermeliksitki/goethe-institute-wordlist" target="_blank" rel="noopener">goethe-institute-wordlist</a>.
+    Tu progreso se guarda en este navegador.
+  </footer>
+</section>
+
+<!-- ===== CRUCIGRAMA ===== -->
+<section id="puzzleView" class="view">
+  <header class="ptop">
+    <button class="icon-btn" id="backBtn" aria-label="Volver al mapa">←</button>
+    <div class="ptitle"><span id="pLevel">A1</span> · <span id="pName">Rätsel 1</span></div>
+    <div class="pstars" id="pStarsLive" title="Estrellas que vas a ganar"></div>
+  </header>
+
+  <div class="play">
+    <div class="board-col">
+      <div class="clue-bar" id="clueBar">
+        <div class="cb-num" id="cbNum">1→</div>
+        <div class="cb-text">
+          <div id="cbDe"></div>
+          <div id="cbEn" class="en"></div>
+        </div>
+      </div>
+      <div class="grid-wrap"><div id="grid" class="grid"></div></div>
+      <input id="kbd" class="kbd" type="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" inputmode="text" aria-label="Escribir letra">
+      <div class="umlauts">
+        <button data-k="Ä">Ä</button><button data-k="Ö">Ö</button><button data-k="Ü">Ü</button>
+        <span class="hint">ß se escribe SS</span>
+      </div>
+      <div class="tools">
+        <button id="trBtn" class="tool" aria-pressed="false">🇬🇧 Traducción</button>
+        <button id="checkBtn" class="tool">✓ Comprobar</button>
+        <button id="revLetterBtn" class="tool">Revelar letra</button>
+        <button id="revWordBtn" class="tool">Revelar palabra</button>
+        <button id="resetBtn" class="tool ghost">Reiniciar</button>
+      </div>
+      <p class="rules">★★★ sin revelar letras · ★★ hasta 3 letras reveladas · ★ completado</p>
+    </div>
+
+    <aside class="clues">
+      <div class="clist"><h3>Waagerecht <small>(horizontal)</small></h3><ol id="listA"></ol></div>
+      <div class="clist"><h3>Senkrecht <small>(vertical)</small></h3><ol id="listD"></ol></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== MODAL FIN ===== -->
+<div id="doneModal" class="modal" hidden>
+  <div class="modal-card">
+    <h2>Super gemacht!</h2>
+    <div class="big-stars" id="doneStars"></div>
+    <p id="doneMsg"></p>
+    <details class="vocab">
+      <summary>Repasar las palabras de este crucigrama</summary>
+      <ul id="vocabList"></ul>
+    </details>
+    <div class="modal-actions">
+      <button id="doneMap" class="btn ghost">Volver al mapa</button>
+      <button id="doneNext" class="btn">Siguiente al azar →</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
